@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/home/daniel/programming/pi4j-1.0-SNAPSHOT/lib/pi4j-core.jar"/>
 	<classpathentry kind="lib" path="/home/daniel/programming/pi4j-1.0-SNAPSHOT/lib/pi4j-service.jar"/>
 	<classpathentry kind="lib" path="/home/daniel/programming/pi4j-1.0-SNAPSHOT/lib/pi4j-gpio-extension.jar"/>
 	<classpathentry kind="lib" path="/home/daniel/programming/pi4j-1.0-SNAPSHOT/lib/pi4j-device.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry exported="true" kind="lib" path="/home/daniel/workspace/Webcam/JOGL/jogl-all.jar" sourcepath="/Webcam/JOGL/jogl-java-src.zip"/>
+	<classpathentry kind="lib" path="/home/daniel/workspace/Webcam/JOGL/gluegen-rt.jar" sourcepath="/Webcam/JOGL/gluegen-java-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,8 +1,13 @@
+package se.daniel.robot.lcd.rpi;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import se.daniel.robot.lcd.Font;
+import se.daniel.robot.lcd.PixelBuffer;
+import se.daniel.robot.lcd.AbstractLcd;
 
 import com.pi4j.wiringpi.Gpio;
 import com.pi4j.wiringpi.Spi;
@@ -16,14 +21,8 @@ import com.pi4j.wiringpi.Spi;
  *  Code picked up Raspberry Pi forums  
  *  http://www.raspberrypi.org/phpBB3/viewtopic.php?p=301522#p301522
  */
-public class Lcd {
-	// White backlight
-	static final byte ROWS = 6;
-	static final byte COLUMNS = 14;
-	static final byte PIXELS_PER_ROW = 6;
-	static final boolean ON = true;
-	static final boolean OFF = false;
-	static final PixelBuffer clsBuffer = new PixelBuffer(ROWS, COLUMNS, PIXELS_PER_ROW);
+public class Lcd extends AbstractLcd {
+	
 
 	//#gpio's :
 	static final byte DC   = 4;// # gpio pin 16 = wiringpi no. 4 (BCM 23)
@@ -37,8 +36,6 @@ public class Lcd {
 	
 	int spiChannel;
 	
-	
-
 	/**
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
@@ -84,14 +81,14 @@ public class Lcd {
 	}
 	
 	
-	public void lcd_cmd(byte[] command)  {
+	private void lcd_cmd(byte[] command)  {
 		Gpio.digitalWrite(DC, OFF);
 		if (Spi.wiringPiSPIDataRW(spiChannel, command, command.length) == -1) {
 			System.err.println("spi failed lcd_cmd");
 		}
 	}
 	
-	public void lcd_data(byte[] data) {
+	private void lcd_data(byte[] data) {
 		Gpio.digitalWrite(DC, ON);
 		if (Spi.wiringPiSPIDataRW(spiChannel, data, data.length) == -1) {
 			System.err.println("spi failed lcd_data");
@@ -109,7 +106,7 @@ public class Lcd {
 	}
 
 	
-	private void set_brightness(int led_value) {
+	public void set_brightness(int led_value) {
 		if ( LED == 1) {
 	        if (0 <= led_value && led_value < 1023) {
 	        	Gpio.pwmWrite(LED, led_value);
@@ -153,38 +150,16 @@ public class Lcd {
 	}
 	
 	public void show_image(BufferedImage im) {
-		PixelBuffer buffer = new PixelBuffer(ROWS, COLUMNS, PIXELS_PER_ROW);
 		
-		for (int x = 0; x < im.getWidth(); x++) {
-			for (int y = 0; y < im.getHeight(); y++) {
-				int rgb = im.getRGB(x, y);
-				boolean bw = blackAndWhite(rgb);
-				//System.out.println("rgb : " + rgb + " bw: " +bw );
-				buffer.setPixel(x, y, bw);//rgb < -1);
-			}	
-		}
+		
+		super.show_image(im);
 		
 		gotoxy(0, 0);
 	    lcd_data(buffer.getData());
 		//im.getRGB(x, y);
 	}
 	
-	//TYPE_INT_ARGB
-	private boolean blackAndWhite(int colorInteger) {
-		int alphaMask = 0xFF000000;
-		int redMask = 0x00FF0000;
-		int greenMask = 0x0000FF00;
-		int blueMask = 0x000000FF;
-		int red = (colorInteger & redMask) >> 16;
-		int green = (colorInteger & greenMask) >> 8;
-		int blue = (colorInteger & blueMask);
-		
-		//grayscale
-		int medium = (red + green + blue) / 3;
-		
-		
-		return (medium) < 128;
-	}
+	
 	    /*# Rotate and mirror the image
 	    rim = im.rotate(-90).transpose(Image.FLIP_LEFT_RIGHT)
 

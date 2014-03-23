@@ -1,3 +1,4 @@
+package se.daniel.robot.lcd;
 /**
  * This code is translated from 
  * 
@@ -24,7 +25,7 @@ public class Font {
 	 * @param c
 	 * @return
 	 */
-	static byte[] getFontChar(char c) {
+	public static byte[] getFontChar(char c) {
 		int index = characters.indexOf(c);
 		if (index == -1) {
 			//Throw exception instead?

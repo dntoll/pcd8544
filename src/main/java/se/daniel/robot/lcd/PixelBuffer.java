@@ -1,3 +1,4 @@
+package se.daniel.robot.lcd;
 
 public class PixelBuffer {
 
@@ -5,8 +6,6 @@ public class PixelBuffer {
 	byte rows;
 	byte columns;
 	byte pixelsPerRow;
-	
-	
 
 	public PixelBuffer(byte rows, byte columns, byte pixelsPerRow) {
 		int sizeInBytes = rows * columns * pixelsPerRow;
@@ -23,6 +22,10 @@ public class PixelBuffer {
 	private byte _BV(int v) {
 		return (byte) (1 << v);
 	}
+	
+	public boolean getPixel(int x, int y) {
+		return (data[x+ (y/8)*getWidth()] & _BV(y%8)) == 0;
+	}
 
 	public void setPixel(int x, int y, boolean value) {
 		//https://github.com/adafruit/Adafruit-PCD8544-Nokia-5110-LCD-library/blob/master/Adafruit_PCD8544.cpp
@@ -30,20 +33,17 @@ public class PixelBuffer {
 			if (value) 
 			    data[x+ (y/8)*getWidth()] |= _BV(y%8);  
 			  else
-				  data[x+ (y/8)*getWidth()] &= ~_BV(y%8); 
+				data[x+ (y/8)*getWidth()] &= ~_BV(y%8); 
 		}
 	}
 	//84x48
-	private int getHeight() {
-		
+	public int getHeight() {
 		return 48;
 	}
 
-	private int getWidth() {
-		// TODO Auto-generated method stub
+	public int getWidth() {
 		return 84;
 	}
 
 	
-
 }
