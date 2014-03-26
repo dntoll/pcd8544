@@ -16,10 +16,14 @@ import javax.media.opengl.glu.GLU;
 import javax.swing.JFrame;
 
 import se.daniel.robot.lcd.AbstractLcd;
+import se.daniel.robot.lcd.Font;
+
 import com.jogamp.opengl.util.*;
 
 public class Window extends AbstractLcd implements GLEventListener  {
-
+	private int row = 0;
+	private int column = 0;
+	
 	public Window() {
 		GLProfile glp = GLProfile.getDefault();
         GLCapabilities caps = new GLCapabilities(glp);
@@ -149,14 +153,23 @@ public class Window extends AbstractLcd implements GLEventListener  {
 	}
 
 	@Override
-	public void gotorc(int i, int j) {
-		// TODO Auto-generated method stub
-		
+	public void gotorc(int row, int column) {
+		this.row = row;
+		this.column = column;
 	}
 
 	@Override
-	public void text(String string) {
-		// TODO Auto-generated method stub
-		
+	public void text(String text) {
+		 for (int i =0; i< text.length(); i++) {
+			 byte[] character = Font.getFontChar(text.charAt(i));
+			 
+			 for (int x = 0; x < 5; x++) {
+				 for (int y = 0; y < 8; y++) {
+					 byte b = character[x];
+					 boolean value = (b & 1 << y)  > 0;
+					 buffer.setPixel((this.column + i)*5 + x, (this.row)*8 + 8-y, value);
+				 }
+			 }
+		 }
 	}
 }

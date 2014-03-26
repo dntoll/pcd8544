@@ -156,46 +156,6 @@ public class Lcd extends AbstractLcd {
 		
 		gotoxy(0, 0);
 	    lcd_data(buffer.getData());
-		//im.getRGB(x, y);
 	}
-	
-	
-	    /*# Rotate and mirror the image
-	    rim = im.rotate(-90).transpose(Image.FLIP_LEFT_RIGHT)
 
-	    # Change display to vertical write mode for graphics
-	    wiringpi.digitalWrite(DC, OFF)
-	    spi.writebytes([0x22])
-
-	    # Start at upper left corner
-	    gotoxy(0, 0)
-	    # Put on display with reversed bit order
-	    wiringpi.digitalWrite(DC, ON)
-	    spi.writebytes( [ BITREVERSE[ord(x)] for x in list(rim.tostring()) ] )
-
-	    # Switch back to horizontal write mode for text
-	    wiringpi.digitalWrite(DC, OFF)
-	    spi.writebytes([0x20])*/
-	
-
-	/**
-	 * @param args
-	 * @throws Exception 
-	 */
-	public static void main(String[] args) throws Exception {
-		
-		Lcd lcd = new Lcd();
-		lcd.cls();
-		lcd.gotorc(1,1);
-		//lcd.text(args[0]);
-		lcd.set_brightness(512);
-		
-		BufferedImage img = null;
-		try {
-		    img = ImageIO.read(new File(args[0]));
-		    lcd.show_image(img);
-		} catch (IOException e) {
-		}
-		
-	}
 }

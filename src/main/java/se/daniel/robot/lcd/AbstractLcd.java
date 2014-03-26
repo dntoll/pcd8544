@@ -30,7 +30,7 @@ public abstract class AbstractLcd {
 		}
 	}
 
-	public abstract void gotorc(int i, int j);
+	public abstract void gotorc(int row, int column);
 
 	public abstract void text(String string);
 
