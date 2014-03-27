@@ -38,7 +38,7 @@ public class Font {
 			returnBuffer[i] = font[index][i];
 		}
 		
-		return font[index];
+		return returnBuffer;
 	}
 	
 	static final String characters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
