@@ -172,7 +172,7 @@ public class Window extends AbstractLcd implements GLEventListener  {
 				 for (int y = 0; y < 8; y++) {
 					 byte b = character[x];
 					 boolean value = (b & 1 << y)  > 0;
-					 buffer.setPixel((this.column + i)*5 + x, (this.row)*8 + 8-y, value);
+					 buffer.setPixel((this.column + i)*5 + x, (5-this.row)*8 + 8-y, value);
 				 }
 			 }
 		 }
