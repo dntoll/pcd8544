@@ -10,5 +10,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry exported="true" kind="lib" path="/home/daniel/workspace/Webcam/JOGL/jogl-all.jar" sourcepath="/Webcam/JOGL/jogl-java-src.zip"/>
 	<classpathentry kind="lib" path="/home/daniel/workspace/Webcam/JOGL/gluegen-rt.jar" sourcepath="/Webcam/JOGL/gluegen-java-src.zip"/>
+	<classpathentry kind="lib" path="/home/daniel/workspace/Webcam/JOGL/gluegen-rt-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="/home/daniel/workspace/Webcam/JOGL/jogl-all-natives-linux-amd64.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

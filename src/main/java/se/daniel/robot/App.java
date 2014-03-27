@@ -15,25 +15,30 @@ import se.daniel.robot.lcd.LCDFactory;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) 
     {
         //Multi platform LCD
     	//On PC its shown as a Window
     	
     	AbstractLcd lcd = LCDFactory.createLcd();
     	
+    	
+    	
 		lcd.cls();
-		lcd.gotorc(2,2);
-		lcd.text("Hello World");
-		lcd.set_brightness(512);
 		
-		/*BufferedImage img = null;
+		BufferedImage img = null;
 		try {
 		    img = ImageIO.read(new File(args[0]));
 		    lcd.show_image(img);
 		} catch (IOException e) {
 			
-		}*/
+		}
+		
+		lcd.gotorc(2,2);
+		lcd.text("Hello World");
+		lcd.set_brightness(512);
+		
+		/**/
     	
     	
     }

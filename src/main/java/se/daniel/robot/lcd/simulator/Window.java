@@ -28,7 +28,12 @@ public class Window extends AbstractLcd implements GLEventListener  {
 		GLProfile glp = GLProfile.getDefault();
         GLCapabilities caps = new GLCapabilities(glp);
         GLCanvas canvas = new GLCanvas(caps) {
-        	   @Override
+        	   /**
+			 * 
+			 */
+			private static final long serialVersionUID = -7126411011488666440L;
+
+			@Override
         	   public Dimension getPreferredSize() {
         	      return new Dimension(84, 48);
         	   }

@@ -46,14 +46,16 @@
    <dependency>
      <groupId>org.jogamp.gluegen</groupId>
      <artifactId>gluegen-rt</artifactId>
-     <classifier>natives-linux-i586</classifier>
+     <!--<classifier>natives-linux-i586</classifier>-->
+     <classifier>natives-linux-amd64</classifier>
      <version>2.1.4</version>
    </dependency>
    <dependency>
      <groupId>org.jogamp.jogl</groupId>
      <artifactId>jogl-all</artifactId>
      <version>2.1.4</version>
-     <classifier>natives-linux-i586</classifier>
+     <!--<classifier>natives-linux-i586</classifier>-->
+     <classifier>natives-linux-amd64</classifier>
    </dependency>
     <dependency>
      <groupId>org.jogamp.jogl</groupId>
@@ -77,10 +79,9 @@
   </repositories>
 
 
-<build>
-    
+  <build>   
     <plugins>
-<!--Compile with target 1.7-->
+      <!--Compile with target 1.7-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -88,16 +89,16 @@
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
-<!--Main class-->
-			<archive>
-			  <manifest>
-				<mainClass>simulator.Window</mainClass>
-			  </manifest>
-			</archive>
+		  <!--Main class-->
+		  <archive>
+			<manifest>
+				<mainClass>se.daniel.robot.App</mainClass>
+			</manifest>
+		  </archive>
         </configuration>
       </plugin>
 
-<!--Include deps into jar-->
+      <!--Include deps into jar-->
       <plugin>
 		<artifactId>maven-assembly-plugin</artifactId>
 		<executions>
@@ -112,6 +113,11 @@
 		  <descriptorRefs>
 		    <descriptorRef>jar-with-dependencies</descriptorRef>
 		  </descriptorRefs>
+		  <archive>
+			<manifest>
+				<mainClass>se.daniel.robot.App</mainClass>
+			</manifest>
+		  </archive>
 		</configuration>
 	  </plugin>
     </plugins>
