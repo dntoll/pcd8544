@@ -33,7 +33,8 @@ public class App
 		} catch (IOException e) {
 			
 		}
-		
+		lcd.gotorc(0,0);
+		lcd.text("012");
 		lcd.gotorc(2,2);
 		lcd.text("Hello World");
 		lcd.set_brightness(512);
