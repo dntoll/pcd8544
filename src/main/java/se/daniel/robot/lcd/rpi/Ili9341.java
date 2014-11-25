@@ -191,7 +191,18 @@ public class Ili9341 extends AbstractLcd {
 	int maxBufferSize = 512;
 	byte[]  sendBuffer = new byte[maxBufferSize];
 	private void lcd_cmd(byte[] command)  {
+		System.out.println("lcd_cmd " + command.length);
+		
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+		
 		Gpio.digitalWrite(DC, OFF);
+		
+		
 	
 		if (command.length < maxBufferSize) {
 			if (Spi.wiringPiSPIDataRW(spiChannel, command, command.length) == -1) {
