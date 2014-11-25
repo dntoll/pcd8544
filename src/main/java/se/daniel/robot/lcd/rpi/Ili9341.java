@@ -48,9 +48,7 @@ public class Ili9341 extends AbstractLcd {
         if (fd <= -1) {
             throw new Exception("SPI setup failed");
         }
-        
-        for(int i = 0;i < 320*240*2; i++)
-			buff[i] = (byte) 0x00;
+
         //Set pin directions.
         Gpio.wiringPiSetup();
         Gpio.pinMode(RST, Gpio.OUTPUT);
