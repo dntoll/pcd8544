@@ -11,9 +11,8 @@ PCD8544 LCD screen is a small cheap screen originally used into Nokia 3110/5110 
 
 This project is dependend on [pi4j](http://pi4j.com)
 Install pi4j http://pi4j.com/install.html
-    
-    curl -s get.pi4j.com | sudo bash
 
+    curl -s get.pi4j.com | sudo bash
     TODO: Write and test installation instructions on blank Raspian
 
 
@@ -21,6 +20,7 @@ The program we will use require `spidev` to be activated. The kernel module shou
 To do so, comment the line `blacklist spi-bcm2708` by adding a heading `#` in the file `/etc/modprobe.d/raspi-blacklist.conf` then reboot the Raspberry Pi to activate this module.
 
 Finally install spidev python library:
+
     sudo apt-get install python-pip python-dev build-essential 
     sudo pip install spidev
 
