@@ -56,21 +56,18 @@ public class Ili9341 extends AbstractLcd {
         	Gpio.pinMode(LED, Gpio.OUTPUT);
         }
         
-        // Toggle RST low to reset.
-        Gpio.digitalWrite(RST, OFF);
-        Thread.sleep(100);
-        Gpio.digitalWrite(RST, ON);
-
-        
-        /*byte command[] = {0x21, 0x14, 0x20, 0x20, 0x0c};
-    	lcd_cmd(command);*/
-        
         lcd_init();
         
         set_brightness(0);
 	}
 	
 	private void lcd_init() throws InterruptedException {
+		
+		// Toggle RST low to reset.
+        Gpio.digitalWrite(RST, OFF);
+        Thread.sleep(10);
+        Gpio.digitalWrite(RST, ON);
+        
 		LCD_Write_COM(0xCB);  
         LCD_Write_DATA(0x39); 
         LCD_Write_DATA(0x2C); 
@@ -226,10 +223,10 @@ public class Ili9341 extends AbstractLcd {
 	}
 	
 	public void set_contrast(byte contrast) {
-	    if ( 0x80 <= contrast && contrast < 0xFF) {
+	   /* if ( 0x80 <= contrast && contrast < 0xFF) {
 	    	byte command[] = {0x21, 0x14, contrast, 0x20, 0x0c};
 	    	lcd_cmd(command);
-	    }
+	    }*/
 	}
 	
 	/*private void gotoxy(int x, int y) {
