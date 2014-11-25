@@ -282,11 +282,11 @@ public class Ili9341 extends AbstractLcd {
 	    lcd_data(buffer.getData());*/
 		
 		 Pant(0xFF);   
-		  Pant(0xF0);   
+		 /* Pant(0xF0);   
 		  Pant(0xE0);  
 		  Pant(0x05);  
 		  Pant(0x1F);    
-		  Pant(0x00);   
+		  Pant(0x00);   */
 	}
 	
 	void Pant(int VL)
