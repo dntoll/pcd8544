@@ -266,23 +266,43 @@ public class Ili9341 extends AbstractLcd {
 	}
 
 	public void text(String text) {
-	    for (int i =0; i< text.length(); i++) {
+	   /* for (int i =0; i< text.length(); i++) {
 	        display_char(text.charAt(i));
-	    }
+	    }*/
 	}
 	
 	private void display_char(char b) {
-        byte[] character = Font.getFontChar(b);
-		lcd_data(character);//+[0]
+       /* byte[] character = Font.getFontChar(b);
+		lcd_data(character);//+[0]*/
 	}
 	
 	public void show_image(BufferedImage im) {
-		
+		/*
 		
 		super.show_image(im);
 		
 		gotoxy(0, 0);
-	    lcd_data(buffer.getData());
+	    lcd_data(buffer.getData());*/
+		
+		 Pant(0xFF);   
+		  Pant(0xF0);   
+		  Pant(0xE0);  
+		  Pant(0x05);  
+		  Pant(0x1F);    
+		  Pant(0x00);   
+	}
+	
+	void Pant(int VL)
+	{
+	  int i,j;
+	  Address_set(0,0,240,320);
+	  for(i=0;i<320;i++)
+	  {
+	    for (j=0;j<480;j++)
+	    {
+	      LCD_Write_DATA(VL);
+	    }
+	  }
 	}
 
 
