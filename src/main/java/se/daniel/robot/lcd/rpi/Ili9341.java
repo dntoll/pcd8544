@@ -22,15 +22,16 @@ public class Ili9341 extends AbstractLcd {
 	static final byte DIN  = 12;// # gpio pin 19 = wiringpi no. 12 (MOSI BCM 10)
 	
 	int spiChannel;
-	byte[] buff = new byte[320*240*2];
+	byte[] buff;
+	int buffersize = 100 ;
 	/**
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
 	 */
 	public Ili9341() throws Exception {
 		this(Spi.CHANNEL_0, 4000000);
-		
-		for(int i = 0;i < 320*240*2; i++)
+		buff = new byte[buffersize];
+		for(int i = 0;i < buffersize; i++)
 			buff[i] = (byte) 0x00;
 	}
 	
@@ -40,7 +41,7 @@ public class Ili9341 extends AbstractLcd {
 	 * @param spiSpeed 4000000 Recommended
 	 * @throws Exception 
 	 */
-	public Ili9341(int spiChannel, int spiSpeed) throws Exception {
+	private Ili9341(int spiChannel, int spiSpeed) throws Exception {
 		this.spiChannel = spiChannel;
 		
 		int fd = Spi.wiringPiSPISetup(spiChannel, spiSpeed);
@@ -332,8 +333,10 @@ public class Ili9341 extends AbstractLcd {
 		int bcl=((g&28)<<3|b>>3);
 		int color = (bch<<8) | bcl;
 		
-		//buff[index*2] = (byte) bch;
-		//buff[index*2+1] = (byte) bcl;
+		if (index * 2 + 1 < buffersize) {
+			buff[index*2] = (byte) bch;
+			buff[index*2+1] = (byte) bcl;
+		}
 		/*LCD_Write_DATA(bch);
 		LCD_Write_DATA(bcl);*/
 	}
