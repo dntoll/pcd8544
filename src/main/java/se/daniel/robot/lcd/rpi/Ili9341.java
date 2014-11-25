@@ -305,16 +305,21 @@ public class Ili9341 extends AbstractLcd {
 	    	if (i < buffer.getWidth() && j < buffer.getHeight()) {
 		    	if (buffer.getPixel(i, j) ) {
 		    		LCD_Write_DATA(0xFF);
-		    		LCD_Write_DATA(0x00);
+		    		LCD_Write_DATA(0xFF);
 		    	} else {
 		    		LCD_Write_DATA(0x00);
 		    		LCD_Write_DATA(0x00);
 		    	}
 	    	} else {
-	    		col++;
+	    		
+	    		
+	    		if (col > 65536)
+	    			col = 0;
 	    		
 	    		LCD_Write_DATA(col >> 8);
 	    		LCD_Write_DATA(col & 0xff);
+	    		
+	    		col++;
 	    	}
 	    	
 	    }
