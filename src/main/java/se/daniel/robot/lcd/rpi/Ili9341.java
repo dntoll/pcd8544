@@ -296,6 +296,8 @@ public class Ili9341 extends AbstractLcd {
 		System.out.println("Pant started + VL");
 	  int i,j;
 	  Address_set(0,0,240,320);
+	  
+	  int col = 0;
 	  for(i=0;i<320;i++)
 	  {
 	    for (j=0;j<240;j++)
@@ -309,8 +311,10 @@ public class Ili9341 extends AbstractLcd {
 		    		LCD_Write_DATA(0x00);
 		    	}
 	    	} else {
-	    		LCD_Write_DATA(i%255);
-	    		LCD_Write_DATA(j%255);
+	    		col++;
+	    		
+	    		LCD_Write_DATA(col >> 8);
+	    		LCD_Write_DATA(col & 0xff);
 	    	}
 	    	
 	    }
