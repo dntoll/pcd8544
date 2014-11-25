@@ -23,7 +23,7 @@ public class Ili9341 extends AbstractLcd {
 	
 	int spiChannel;
 	byte[] buff;
-	int buffersize = 4000 ;
+	int buffersize = 2000 ;
 	/**
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
