@@ -200,15 +200,6 @@ public class Ili9341 extends AbstractLcd {
 	int maxBufferSize = 1024;
 	byte[]  sendBuffer = new byte[maxBufferSize];
 	private void lcd_data(byte[] command) {
-		/*System.out.println("lcd_cmd " + command.length);
-		
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}*/
-		
 		Gpio.digitalWrite(DC, ON);
 		
 		
@@ -282,13 +273,7 @@ public class Ili9341 extends AbstractLcd {
 	    }*/
 	}
 	
-	/*private void gotoxy(int x, int y) {
-		if ( (0 <= x && x < COLUMNS) && (0 <= y && y < ROWS)) {
-			
-			byte command[] = {(byte) (x+128), (byte) (y + 64) };
-			lcd_cmd(command);
-		}
-	}*/
+	
 	
 	void Address_set( int x1, int y1, int x2, int y2)
 	{
@@ -316,13 +301,13 @@ public class Ili9341 extends AbstractLcd {
 	}
 
 	public void text(String text) {
-	   /* for (int i =0; i< text.length(); i++) {
+	    for (int i =0; i< text.length(); i++) {
 	        display_char(text.charAt(i));
-	    }*/
+	    }
 	}
 	
 	private void display_char(char b) {
-       /* byte[] character = Font.getFontChar(b);
+        byte[] character = Font.getFontChar(b);
 		lcd_data(character);//+[0]*/
 	}
 	
