@@ -30,6 +30,7 @@ To install the library, execute the following commands:
 
     git clone https://github.com/dntoll/pcd8544.git
     cd pcd8544
+    sudo java -jar test.jar examples/raspi.bmp 
 
 
 ## Wiring the LCD to the Raspberry Pi
