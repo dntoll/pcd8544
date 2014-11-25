@@ -207,6 +207,8 @@ public class Ili9341 extends AbstractLcd {
 				if (Spi.wiringPiSPIDataRW(spiChannel, sendBuffer, sendBuffer.length) == -1) {
 					System.err.println("spi failed lcd_cmd");
 				}
+				
+				System.out.println("Sent call " + call);
 			}
 			
 			int numLeftOvers = command.length % 1024;
@@ -220,6 +222,8 @@ public class Ili9341 extends AbstractLcd {
 				if (Spi.wiringPiSPIDataRW(spiChannel, leftovers, leftovers.length) == -1) {
 					System.err.println("spi failed lcd_cmd");
 				}
+				
+				System.out.println("Sent leftover " + numLeftOvers);
 			}
 		}
 		
