@@ -28,7 +28,7 @@ public class Ili9341 extends AbstractLcd {
 	 * @throws Exception 
 	 */
 	public Ili9341() throws Exception {
-		this(Spi.CHANNEL_0, 4000000);
+		this(Spi.CHANNEL_0, 40000000);
 	}
 	
 	/**
