@@ -1,28 +1,15 @@
 package se.daniel.robot.lcd.rpi;
+
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import se.daniel.robot.lcd.Font;
-import se.daniel.robot.lcd.PixelBuffer;
-import se.daniel.robot.lcd.AbstractLcd;
 
 import com.pi4j.wiringpi.Gpio;
 import com.pi4j.wiringpi.Spi;
 
-/**
- * This code is translated from 
- * 
- * https://github.com/XavierBerger/pcd8544/blob/master/src/lcd.py
- * 
- *  Original code:
- *  Code picked up Raspberry Pi forums  
- *  http://www.raspberrypi.org/phpBB3/viewtopic.php?p=301522#p301522
- */
-public class Lcd extends AbstractLcd {
-	
+import se.daniel.robot.lcd.AbstractLcd;
+import se.daniel.robot.lcd.Font;
+
+public class Ili9341 extends AbstractLcd {
+
 
 	//#gpio's :
 	static final byte DC   = 4;// # gpio pin 16 = wiringpi no. 4 (BCM 23)
@@ -40,7 +27,7 @@ public class Lcd extends AbstractLcd {
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
 	 */
-	public Lcd() throws Exception {
+	public Ili9341() throws Exception {
 		this(Spi.CHANNEL_0, 4000000);
 	}
 	
@@ -50,7 +37,7 @@ public class Lcd extends AbstractLcd {
 	 * @param spiSpeed 4000000 Recommended
 	 * @throws Exception 
 	 */
-	public Lcd(int spiChannel, int spiSpeed) throws Exception {
+	public Ili9341(int spiChannel, int spiSpeed) throws Exception {
 		this.spiChannel = spiChannel;
 		
 		int fd = Spi.wiringPiSPISetup(spiChannel, spiSpeed);
@@ -157,5 +144,6 @@ public class Lcd extends AbstractLcd {
 		gotoxy(0, 0);
 	    lcd_data(buffer.getData());
 	}
+
 
 }

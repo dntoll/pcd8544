@@ -15,7 +15,7 @@ import com.pi4j.wiringpi.Spi;
  *  Code picked up Raspberry Pi forums  
  *  http://www.raspberrypi.org/phpBB3/viewtopic.php?p=301522#p301522
  */
-public class RPILcd extends AbstractLcd {
+public class pcd8544 extends AbstractLcd {
 	
 
 	//#gpio's :
@@ -34,7 +34,7 @@ public class RPILcd extends AbstractLcd {
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
 	 */
-	public RPILcd() throws Exception {
+	public pcd8544() throws Exception {
 		this(Spi.CHANNEL_0, 4000000);
 	}
 	
@@ -44,7 +44,7 @@ public class RPILcd extends AbstractLcd {
 	 * @param spiSpeed 4000000 Recommended
 	 * @throws Exception 
 	 */
-	public RPILcd(int spiChannel, int spiSpeed) throws Exception {
+	public pcd8544(int spiChannel, int spiSpeed) throws Exception {
 		this.spiChannel = spiChannel;
 		
 		int fd = Spi.wiringPiSPISetup(spiChannel, spiSpeed);
