@@ -22,7 +22,7 @@ public class Ili9341 extends AbstractLcd {
 	static final byte DIN  = 12;// # gpio pin 19 = wiringpi no. 12 (MOSI BCM 10)
 	
 	int spiChannel;
-	
+	byte[] buff = new byte[320*240*2];
 	/**
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
@@ -298,7 +298,7 @@ public class Ili9341 extends AbstractLcd {
 	  Address_set(0,0,240,320);
 	  
 	  int pixel = 0;
-	  byte[] buff = new byte[320*240*2];
+	  
 	  for(i=0;i<320;i++)
 	  {
 	    for (j=0;j<240;j++)
