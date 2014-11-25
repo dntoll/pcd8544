@@ -199,8 +199,8 @@ public class Ili9341 extends AbstractLcd {
 	}
 	
 	public void cls() {
-	    gotoxy(0, 0);
-	    lcd_data(clsBuffer.getData());
+	   /* gotoxy(0, 0);
+	    lcd_data(clsBuffer.getData());*/
 	}
 	
 	
@@ -309,7 +309,7 @@ public class Ili9341 extends AbstractLcd {
 		    		LCD_Write_DATA(0x00);
 		    	}
 	    	}
-	    	LCD_Write_DATA(0x00);
+	    	
 	    }
 	  }
 	  
