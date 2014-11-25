@@ -188,9 +188,18 @@ public class Ili9341 extends AbstractLcd {
 		lcd_cmd(command);
 	}
 
+	
+	private void lcd_cmd(byte[] command)  {
+		
+		Gpio.digitalWrite(DC, OFF);
+		if (Spi.wiringPiSPIDataRW(spiChannel, command, command.length) == -1) {
+			System.err.println("spi failed lcd_cmd");
+		}
+	
+	}
 	int maxBufferSize = 512;
 	byte[]  sendBuffer = new byte[maxBufferSize];
-	private void lcd_cmd(byte[] command)  {
+	private void lcd_data(byte[] command) {
 		System.out.println("lcd_cmd " + command.length);
 		
 		try {
@@ -200,7 +209,7 @@ public class Ili9341 extends AbstractLcd {
 			//e.printStackTrace();
 		}
 		
-		Gpio.digitalWrite(DC, OFF);
+		Gpio.digitalWrite(DC, ON);
 		
 		
 	
@@ -239,14 +248,6 @@ public class Ili9341 extends AbstractLcd {
 				
 				
 			}
-		}
-		
-	}
-	
-	private void lcd_data(byte[] data) {
-		Gpio.digitalWrite(DC, ON);
-		if (Spi.wiringPiSPIDataRW(spiChannel, data, data.length) == -1) {
-			System.err.println("spi failed lcd_data");
 		}
 	}
 	
