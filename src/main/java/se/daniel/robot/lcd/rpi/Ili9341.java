@@ -23,7 +23,7 @@ public class Ili9341 extends AbstractLcd {
 	
 	int spiChannel;
 	byte[] buff;
-	int buffersize = 2000 ;
+	int buffersize = 320*240*2;
 	/**
 	 * Default Constructor starting lcd on Spi channel 0 and with a speed of 4000000
 	 * @throws Exception 
@@ -43,6 +43,7 @@ public class Ili9341 extends AbstractLcd {
 	 */
 	private Ili9341(int spiChannel, int spiSpeed) throws Exception {
 		this.spiChannel = spiChannel;
+		
 		
 		int fd = Spi.wiringPiSPISetup(spiChannel, spiSpeed);
         if (fd <= -1) {
@@ -187,11 +188,41 @@ public class Ili9341 extends AbstractLcd {
 		lcd_cmd(command);
 	}
 
+	byte[]  sendBuffer = new byte[1024];
 	private void lcd_cmd(byte[] command)  {
 		Gpio.digitalWrite(DC, OFF);
-		if (Spi.wiringPiSPIDataRW(spiChannel, command, command.length) == -1) {
-			System.err.println("spi failed lcd_cmd");
+	
+		if (command.length < 1024) {
+			if (Spi.wiringPiSPIDataRW(spiChannel, command, command.length) == -1) {
+				System.err.println("spi failed lcd_cmd");
+			}
+		} else {
+			int numcalls = command.length / 1024;
+			
+			for (int call = 0; call < numcalls; call++) {
+				
+				for (int b = 0; b < 1024; b++) {
+					sendBuffer[b] = command[call * 1024 + b];
+				}
+				if (Spi.wiringPiSPIDataRW(spiChannel, sendBuffer, sendBuffer.length) == -1) {
+					System.err.println("spi failed lcd_cmd");
+				}
+			}
+			
+			int numLeftOvers = command.length % 1024;
+			
+			if (numLeftOvers > 0) {
+				//leftovers
+				byte leftovers[] = new byte[numLeftOvers];
+				for (int b = 0; b < 1024; b++) {
+					leftovers[b] = command[numcalls * 1024 + b];
+				}
+				if (Spi.wiringPiSPIDataRW(spiChannel, leftovers, leftovers.length) == -1) {
+					System.err.println("spi failed lcd_cmd");
+				}
+			}
 		}
+		
 	}
 	
 	private void lcd_data(byte[] data) {
