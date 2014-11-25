@@ -232,18 +232,39 @@ public class Ili9341 extends AbstractLcd {
 	    }
 	}
 	
-	private void gotoxy(int x, int y) {
+	/*private void gotoxy(int x, int y) {
 		if ( (0 <= x && x < COLUMNS) && (0 <= y && y < ROWS)) {
 			
 			byte command[] = {(byte) (x+128), (byte) (y + 64) };
 			lcd_cmd(command);
 		}
+	}*/
+	
+	void Address_set( int x1, int y1, int x2, int y2)
+	{
+	   LCD_Write_COM(0x2a);
+	   LCD_Write_DATA(x1>>8);
+	   LCD_Write_DATA(x1);
+	   LCD_Write_DATA(x2>>8);
+	   LCD_Write_DATA(x2);
+	  
+	   LCD_Write_COM(0x2b);
+	   LCD_Write_DATA(y1>>8);
+	   LCD_Write_DATA(y1);
+	   LCD_Write_DATA(y2>>8);
+	   LCD_Write_DATA(y2);
+
+	   LCD_Write_COM(0x2C);         				 
 	}
 	
 	public void gotorc(int r, int c) {
 		gotoxy(c*ROWS, r);
 	}
 	
+	private void gotoxy(int x, int y) {
+		Address_set(x,y, 240, 320);
+	}
+
 	public void text(String text) {
 	    for (int i =0; i< text.length(); i++) {
 	        display_char(text.charAt(i));
