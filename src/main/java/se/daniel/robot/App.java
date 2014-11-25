@@ -25,7 +25,7 @@ public class App
     	
     	
 		lcd.cls();
-		
+		lcd.set_brightness(512);
 		BufferedImage img = null;
 		try {
 		    img = ImageIO.read(new File(args[0]));
