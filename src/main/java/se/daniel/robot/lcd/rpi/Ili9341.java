@@ -29,6 +29,9 @@ public class Ili9341 extends AbstractLcd {
 	 */
 	public Ili9341() throws Exception {
 		this(Spi.CHANNEL_0, 4000000);
+		
+		for(int i = 0;i < 320*240*2; i++)
+			buff[i] = (byte) 0x00;
 	}
 	
 	/**
