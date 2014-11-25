@@ -297,43 +297,41 @@ public class Ili9341 extends AbstractLcd {
 	  int i,j;
 	  Address_set(0,0,240,320);
 	  
-	  int col = 0;
+	  int pixel = 0;
+	  byte[] buff = new byte[320*240*2];
 	  for(i=0;i<320;i++)
 	  {
 	    for (j=0;j<240;j++)
 	    {
 	    	if (i < buffer.getWidth() && j < buffer.getHeight()) {
 		    	if (buffer.getPixel(i, j) ) {
-		    		LCD_Write_DATA(0xFF);
-		    		LCD_Write_DATA(0xFF);
+		    		setColor(buff, pixel, 255, 255, 255);
 		    	} else {
-		    		LCD_Write_DATA(0x00);
-		    		LCD_Write_DATA(0x00);
+		    		setColor(buff, pixel, 0, 0, 0);
 		    	}
 	    	} else {
-	    		
-	    		
-	    		
-	    		setColor(0, 255, 0);
-	    		
-	    		
+	    		setColor(buff, pixel, 0, 255, 0);
 	    	}
-	    	
+	    	pixel++;
 	    }
 	  }
+	  System.out.println("Done buffering");
+	  lcd_data(buff);
 	  
 	  System.out.println("Pant ended");
 	}
 	
-	void setColor(int r, int g, int b)
+	void setColor(byte[] buff, int index, int r, int g, int b)
 	{
 		// rrrrrggggggbbbbb
 		int bch=((r&248)|g>>5);
 		int bcl=((g&28)<<3|b>>3);
 		int color = (bch<<8) | bcl;
 		
-		LCD_Write_DATA(bch);
-		LCD_Write_DATA(bcl);
+		buff[index*2] = (byte) bch;
+		buff[index*2+1] = (byte) bcl;
+		/*LCD_Write_DATA(bch);
+		LCD_Write_DATA(bcl);*/
 	}
 
 
