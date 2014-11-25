@@ -278,8 +278,10 @@ public class Ili9341 extends AbstractLcd {
 		
 		super.show_image(im);
 		
-		gotoxy(0, 0);
-	    lcd_data(buffer.getData());
+		Pant(0x00);
+		//gotoxy(0, 0);
+		//Address_set(0,0,240,320);
+	    //lcd_data(buffer.getData());
 		
 		/*Pant(0xFF);   
 		Pant(0xF0);   
@@ -298,7 +300,14 @@ public class Ili9341 extends AbstractLcd {
 	  {
 	    for (j=0;j<480;j++)
 	    {
-	      LCD_Write_DATA(VL);
+	    	if (i < buffer.getWidth() && j < buffer.getHeight()) {
+		    	if (buffer.getPixel(i, j) ) {
+		    		LCD_Write_DATA(0xFF);
+		    	} else {
+		    		LCD_Write_DATA(0x00);
+		    	}
+	    	}
+	    	LCD_Write_DATA(0x00);
 	    }
 	  }
 	  
