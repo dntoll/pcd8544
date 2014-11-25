@@ -313,19 +313,27 @@ public class Ili9341 extends AbstractLcd {
 	    	} else {
 	    		
 	    		
-	    		if (col > 65536)
-	    			col = 0;
 	    		
-	    		LCD_Write_DATA(col >> 8);
-	    		LCD_Write_DATA(col & 0xff);
+	    		setColor(255, 0, 0);
 	    		
-	    		col++;
+	    		
 	    	}
 	    	
 	    }
 	  }
 	  
 	  System.out.println("Pant ended");
+	}
+	
+	void setColor(int r, int g, int b)
+	{
+		// rrrrrggggggbbbbb
+		int bch=((r&248)|g>>5);
+		int bcl=((g&28)<<3|b>>3);
+		int color = (bch<<8) | bcl;
+		
+		LCD_Write_DATA(bch);
+		LCD_Write_DATA(bcl);
 	}
 
 
