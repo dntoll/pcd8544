@@ -225,7 +225,7 @@ public class Ili9341 extends AbstractLcd {
 				for (int b = 0; b < maxBufferSize; b++) {
 					sendBuffer[b] = command[call * maxBufferSize + b];
 				}
-				System.out.println("Sent call " + call);
+				//System.out.println("Sent call " + call);
 				if (Spi.wiringPiSPIDataRW(spiChannel, sendBuffer, sendBuffer.length) == -1) {
 					System.err.println("spi failed lcd_cmd");
 				}
@@ -241,7 +241,7 @@ public class Ili9341 extends AbstractLcd {
 				for (int b = 0; b < 1024; b++) {
 					leftovers[b] = command[numcalls * maxBufferSize + b];
 				}
-				System.out.println("Sent leftover " + numLeftOvers);
+				//System.out.println("Sent leftover " + numLeftOvers);
 				if (Spi.wiringPiSPIDataRW(spiChannel, leftovers, leftovers.length) == -1) {
 					System.err.println("spi failed lcd_cmd");
 				}
