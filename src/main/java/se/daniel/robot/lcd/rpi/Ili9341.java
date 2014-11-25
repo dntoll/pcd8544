@@ -308,6 +308,9 @@ public class Ili9341 extends AbstractLcd {
 		    		LCD_Write_DATA(0x00);
 		    		LCD_Write_DATA(0x00);
 		    	}
+	    	} else {
+	    		LCD_Write_DATA(0x00);
+	    		LCD_Write_DATA(0x00);
 	    	}
 	    	
 	    }
