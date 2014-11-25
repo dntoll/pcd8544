@@ -314,7 +314,7 @@ public class Ili9341 extends AbstractLcd {
 	    		
 	    		
 	    		
-	    		setColor(255, 0, 0);
+	    		setColor(i %255, j %255, 255);
 	    		
 	    		
 	    	}
