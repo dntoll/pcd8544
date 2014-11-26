@@ -197,8 +197,9 @@ public class Ili9341 extends AbstractLcd {
 		}
 	
 	}
-	int maxBufferSize = 1024;
+	int maxBufferSize = 2048;
 	byte[]  sendBuffer = new byte[maxBufferSize];
+	
 	private void lcd_data(byte[] command) {
 		Gpio.digitalWrite(DC, ON);
 		
@@ -229,7 +230,7 @@ public class Ili9341 extends AbstractLcd {
 			if (numLeftOvers > 0) {
 				//leftovers
 				byte leftovers[] = new byte[numLeftOvers];
-				for (int b = 0; b < 1024; b++) {
+				for (int b = 0; b < numLeftOvers; b++) {
 					leftovers[b] = command[numcalls * maxBufferSize + b];
 				}
 				//System.out.println("Sent leftover " + numLeftOvers);
